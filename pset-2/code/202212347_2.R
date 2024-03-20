@@ -16,8 +16,20 @@ rm(list=ls())
 ##Instalar y llamar librerías
 require(pacman)
 
-p_load(tidyverse, rio, skimr, janitor, data.table) 
-
+p_load(tidyverse, rio, skimr, janitor, haven) 
 
 #############################################
-####INTRODUCCION A R: OPERADORES Y FUNCIONES
+####1. IMPORTAR/EXPORTAR BASES DE DATOS
+
+#1.1
+location <- import("pset-2/input/Módulo de sitio o ubicación.dta") %>% clean_names()
+identification <- import("pset-2/input/Módulo de identificación.dta") %>% clean_names()
+
+#1.2
+export(x=location, file="pset-2/output/location.rds")
+export(x=identification, file="pset-2/output/identification.rds")
+
+
+
+
+
