@@ -4,7 +4,8 @@
 ##       PROBLEM SET 2                ##
 ##                                    ##
 ##  David Florez-202212347            ##
-## Maria Contreras-202014039          ##
+## Maria Contreras-202014039 
+##
 ##                                    ##
 ## R version 4.3.1 (2023-06-16 ucrt)  ##
 ##                                    ##
@@ -16,7 +17,7 @@ rm(list=ls())
 ##Instalar y llamar librerías
 require(pacman)
 
-p_load(tidyverse, rio, skimr, janitor, haven) 
+p_load(tidyverse, rio, skimr, janitor, haven, data.table) 
 
 #############################################
 ####1. IMPORTAR/EXPORTAR BASES DE DATOS
@@ -46,6 +47,8 @@ identification <- mutate(identification,
                                                   p241>=35 &p241<50 ~ "Adulto",
                                                   p241>=50  ~ "Senior" ))
 
+#Joven (menores de 18), Adulto joven (18-35 años), Adulto (35-50 años), Senior (mayores de 50 años)
+
 #2.3
 location <- mutate(location, 
                    ambulante=ifelse(p3053==3 |p3053==4 | p3053==5,yes=1, no=0))
@@ -67,7 +70,16 @@ location_sub <- location[, c("directorio", "secuencia_p", "secuencia_encuesta", 
 #4.1
 combined_data <- data.frame(identification_sub, location_sub)
 
-#Punto 5
+####
+
+#5.1
+
+skim(combined_data)
+summary(combined_data)
+table(combined_data$grupo_etario)
+table(combined_data$cod_depto)
+hist(combined_data$ambulante)
+
 
 
 
