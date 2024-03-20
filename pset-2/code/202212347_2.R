@@ -48,7 +48,26 @@ identification <- mutate(identification,
 
 #2.3
 location <- mutate(location, 
-                   ambulante=ifelse(p3053==3 |p3053==4 | p3053==5, yes=1, no=0))
+                   ambulante=ifelse(p3053==3 |p3053==4 | p3053==5,yes=1, no=0))
+
+
+
+#Punto 3
+
+
+#3.1 
+identification_sub <- identification[, c("directorio", "secuencia_p", "secuencia_encuesta", "grupo_etario", "cod_depto", "f_exp")]
+
+
+#3.2 
+location_sub <- location[, c("directorio", "secuencia_p", "secuencia_encuesta", "ambulante","p3054", "p469", "cod_depto", "f_exp")]
+
+#Punto 4
+
+#4.1
+combined_data <- data.frame(identification_sub, location_sub)
+
+#Punto 5
 
 
 
