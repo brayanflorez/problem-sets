@@ -29,6 +29,27 @@ identification <- import("pset-2/input/Módulo de identificación.dta") %>% clea
 export(x=location, file="pset-2/output/location.rds")
 export(x=identification, file="pset-2/output/identification.rds")
 
+#############################################
+#### 2. GENERAR VARIABLES
+
+#2.1
+identification <- mutate(identification, 
+                         bussiness_type = case_when(grupos4=="01" ~ "Agricultura",
+                                                    grupos4=="02" ~ "Industria manufacturera",
+                                                    grupos4=="03" ~ "Comercio",
+                                                    grupos4=="04" ~ "Servicios" ))
+
+#2.2
+identification <- mutate(identification, 
+                         grupo_etario = case_when(p241>=0 &p241<18 ~ "Jovén",
+                                                  p241>=18 &p241<35 ~ "Adulto joven",
+                                                  p241>=35 &p241<50 ~ "Adulto",
+                                                  p241>=50  ~ "Senior" ))
+
+#2.3
+location <- mutate(location, 
+                   ambulante=ifelse(p3053==3 |p3053==4 | p3053==5, yes=1, no=0))
+
 
 
 
