@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 *.zip
-*.Rmd
+.Rmd
+.DS_Store
