@@ -1,0 +1,237 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{spanish}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\usepackage{xcolor}
+\usepackage[colorlinks = true, linkcolor = blue, urlcolor  = blue, citecolor = blue, anchorcolor = blue]{hyperref}
+\newcommand{\MYhref}[3][blue]{\href{#2}{\color{#1}{#3}}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Taller de R: Estadística y Programación},
+  pdfauthor={Problem set 4},
+  pdflang={es},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Taller de R: Estadística y Programación}
+\author{Problem set 4}
+\date{2024-04-20}
+
+\begin{document}
+\maketitle
+
+En este taller se evalúan los temas vistos en las clases 11 y 13 del
+curso. Lea atentamente las instrucciones del taller.
+
+\begin{center} \textcolor{blue}{\subsection{Instrucciones}} \end{center}
+
+\begin{itemize}
+\item
+  Este taller representa el \textbf{25\%} de la nota total del curso y
+  puede ser realizado de manera individual o en grupos de hasta 3
+  personas. En las primeras líneas del script, escriba su nombre, código
+  y la versión de R que está utilizando. Además, al inicio del código,
+  debe incluir las librerías que utilizará en la sesión, por ejemplo:
+  \texttt{pacman}, \texttt{rio}, \texttt{data.table},
+  \texttt{tidyverse}, \texttt{sf}, y \texttt{rvest}.
+\item
+  Asegúrese de descargar las bases de datos desde el repositorio
+  \url{https://github.com/taller-r-202403/problem-sets} y de crear un
+  nuevo repositorio en su cuenta de GitHub. Si trabaja en grupo, solo un
+  integrante debe crear el repositorio y compartir el acceso con los
+  demás. El repositorio debe ser público para permitir el acceso desde
+  cualquier cuenta de GitHub. Incluya al menos tres carpetas en el
+  repositorio: \texttt{input} (datos originales), \texttt{output} (datos
+  procesados), y \texttt{code} (script con la respuesta del taller).
+\item
+  Todos los integrantes del grupo deben publicar el enlace al
+  repositorio de GitHub en la actividad \textbf{Problem-set-3} del
+  Bloque Neón antes de las 23:59 horas del 26 de abril de 2024.
+\item
+  Por favor, organice su trabajo cuidadosamente y comente paso a paso
+  cada línea de código. Recuerde \textbf{NO} usar acentos ni caracteres
+  especiales dentro del código para evitar problemas al abrir los
+  scripts en diferentes sistemas operativos.
+\item
+  No seguir estas instrucciones resultará en una penalización del
+  \textbf{20\%} en la nota final.
+\end{itemize}
+
+\begin{center} \textcolor{blue}{\subsection{Solucionar:}} \end{center}
+
+Se debe emplear un bucle o una función para importar los archivos de la
+Gran Encuesta Integrada de Hogares que se encuentran en la carpeta
+\texttt{input}. Además, si es necesario, se puede acceder al
+\href{https://microdatos.dane.gov.co/index.php/catalog/782/data-dictionary}{\color{blue}{diccionario}}
+o descargar el documento
+\href{https://www.dane.gov.co/files/operaciones/GEIH/bol-GEIH-dic2023.pdf}{\color{blue}{técnico}}
+de los datos.
+
+\subsection{\texorpdfstring{\textbf{1. Bucle
+(35\%)}}{1. Bucle (35\%)}}\label{bucle-35}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{1.1} \textbf{Lista de archivos} \texttt{input}
+\end{itemize}
+
+Cree un objeto que almacene el vector de nombres de los archivos dentro
+de la carpeta \texttt{input}. Asegúrese de que cada archivo contenga la
+ruta con la ubicación de cada archivo.
+
+\textbf{Hint:} Para este punto, puede usar la función
+\texttt{list.files()} con el argumento \texttt{recursive\ =\ T}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{1.2} \textbf{Importar archivos:}
+\end{itemize}
+
+Usa el objeto creado en el punto anterior como insumo de una función que
+permita importar los archivos de \texttt{Fuerza\ de\ trabajo},
+\texttt{No\ ocupados} y \texttt{Ocupados} para todos los meses.
+
+\textbf{Hint:} Para este punto, puedes crear una función que importe un
+archivo y combinarla con la función \texttt{lapply}. O puedes crear un
+bucle y almacenar los dataframes en un objeto tipo lista.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{1.3 Combinar conjuntos de datos}
+\end{itemize}
+
+Combina todos los \texttt{data.frame} que importaste en el punto
+anterior tres \texttt{data.frame}.
+
+\textbf{Hint:} Para este punto, puede usar la función \texttt{rbindlist}
+de la librería \texttt{data.table}.
+
+\subsection{\texorpdfstring{\textbf{2. Preparación
+(35\%)}}{2. Preparación (35\%)}}\label{preparaciuxf3n-35}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{2.1 Creación d bases de datos}
+\end{itemize}
+
+Cree tres bases de datos diferentes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Usando la base de datos llamada \texttt{fuerza\ de\ trabajo}, suma el
+  número de individuos que hacen parte de la fuerza laboral (\textbf{ft
+  == 1}) y aquellos que hacen parte de la población en edad de trabajar
+  (\textbf{pet == 1}) por mes, asegurándote de tener en cuenta el factor
+  de expansión.
+\item
+  Usando la base de datos llamada \texttt{Ocupados}, suma el número de
+  individuos que se encuentren empleados (\textbf{ft == 1}) por mes,
+  asegurándote de tener en cuenta el factor de expansión.
+\item
+  Usando la base de datos llamada \texttt{No\ ocupados}, suma el número
+  de individuos desempleados (\textbf{dsi == 1}) por mes, asegurándote
+  de tener en cuenta el factor de expansión.''
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{2.2 Colapsar datos a nivel mensual}
+\end{itemize}
+
+Unifica todas las bases de datos creadas en el punto anterior en una
+única base llamada \texttt{Output}, que debe contener al menos cinco
+columnas: \texttt{Población\ en\ edad\ de\ trabajar},
+\texttt{fuerza\ laboral}, \texttt{ocupados}, \texttt{desempleados} y el
+\texttt{mes} correspondiente.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{2.3 Tasas de desempleo y ocupación.}
+\end{itemize}
+
+Divida el número de individuos \texttt{desempleados} por la
+\texttt{fuerza\ laboral} para obtener la tasa de desempleo, y los
+\texttt{ocupados} por la \texttt{población\ en\ edad} de trabajar para
+obtener la tasa de ocupación.
+
+\subsection{\texorpdfstring{\textbf{3. GGplot2
+(30\%)}}{3. GGplot2 (30\%)}}\label{ggplot2-30}
+
+Grafique las tasas de desempleo y ocupación para cada mes utilizando la
+función \texttt{geom\_line}. (\textbf{Hint:} Realice un pivot wider a
+las tasas de modo que los valores estén en una sola columna)
+
+\end{document}

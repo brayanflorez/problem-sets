@@ -1,7 +1,7 @@
 ---
 title: "Taller de R: Estadística y Programación"
-author: "Taller 3"
-date: "2024-03-28"
+author: "Problem set 4"
+date: "2024-04-20"
 output: 
        pdf_document:
                    latex_engine: xelatex
@@ -21,7 +21,7 @@ header-includes:
 knitr::opts_chunk$set(echo = T , eval = T , warning = T)
 ```
 
-En este taller se evalúan los temas vistos en las clases 7 y 10 del curso. Lea atentamente las instrucciones del taller.
+En este taller se evalúan los temas vistos en las clases 11 y 13 del curso. Lea atentamente las instrucciones del taller.
 
 <!-------- Instrucciones ----------->
 \begin{center} \textcolor{blue}{\subsection{Instrucciones}} \end{center}
