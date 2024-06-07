@@ -100,7 +100,9 @@ sd_mpg <- sd(db_house$price)
 ##2
 mean_db <- mean(db_house$surface_total)
 sd_db<- sd(db_house$surface_total)
-
-
-
+##3
+median_mpg <- median(db_house$price)
+##4
+range_mpg <- range(db_house$price)
+percentiles_mpg <- quantile(db_house$price, probs = c(0.25, 0.5, 0.75))
 
