@@ -93,6 +93,14 @@ print(map)
 ggsave("mapa_valores_vivienda.pdf", plot = map, device = "pdf")
 
 
+##Analisis 
+##1
+mean_mpg <- mean(db_house$price)
+sd_mpg <- sd(db_house$price)
+##2
+mean_db <- mean(db_house$surface_total)
+sd_db<- sd(db_house$surface_total)
+
 
 
 
