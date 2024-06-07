@@ -58,8 +58,39 @@ print(db_house)
 
 #############################################
 ####2. MANIPULAR LA INFORMACIÓN GIS
+# Instalar y cargar el paquete sf
+if (!requireNamespace("sf", quietly = TRUE)) {
+  install.packages("sf")
+}
+library(sf)
+# Convertir `db_house` en SimpleFeature 
+sf_house <- st_as_sf(db_house, coords = c("lon", "lat"), crs = 4326)
+print(sf_house)
 
+##2.2
+##Instalar y cargar paquetes
 
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+if (!requireNamespace("viridis", quietly = TRUE)) {
+  install.packages("viridis")
+}
+library(sf)
+library(ggplot2)
+library(viridis)
+
+##Crear el mapa
+
+map <- ggplot(data = sf_house) +
+  geom_sf(aes(fill = price)) +  
+  scale_fill_viridis(name = "Valor de la vivienda", option = "viridis") +
+  theme_minimal() +
+  labs(title = "Mapa de Valores de Vivienda")
+
+##Corroborar
+print(map)
+ggsave("mapa_valores_vivienda.pdf", plot = map, device = "pdf")
 
 
 
