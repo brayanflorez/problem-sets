@@ -96,13 +96,25 @@ ggsave("mapa_valores_vivienda.pdf", plot = map, device = "pdf")
 ##Analisis 
 ##1
 mean_mpg <- mean(db_house$price)
+print(mean_mpg)
 sd_mpg <- sd(db_house$price)
+print(sd_mpg)
 ##2
 mean_db <- mean(db_house$surface_total)
+print(mean_db)
 sd_db<- sd(db_house$surface_total)
+print(sd_db)
 ##3
-median_mpg <- median(db_house$price)
-##4
-range_mpg <- range(db_house$price)
-percentiles_mpg <- quantile(db_house$price, probs = c(0.25, 0.5, 0.75))
-
+hist(db_house$price, 
+     main = "Histograma precio",
+     xlab = "Price",
+     col = "lightblue", 
+     border = "black")
+##conclusion de las estadisticas
+##En base a las estadísticas podemos observar que el precio de
+##las viviendas es considerablemente alto, pues la media se encuentra en  $1,399,712,145.
+##No obstante, esta cifra también sugiere que pueden existir valores atípicos, que rondan 
+##en precios extremadamente altos, que podrían influir en el resultado. Por otro lado,
+##la desviación estándar nos presenta una variabilidad en los precios, es decir,
+##estos oscilan en un rango amplio entre diferentes viviendas. Dicha observación 
+##es consistente con la disparidad económica entre los estudiantes.
