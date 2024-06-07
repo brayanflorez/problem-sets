@@ -1,18 +1,26 @@
 ---
-title: "Pset-4"
+title: "Universidad de los Andes "
+subtitle: "Facultad de Economía  "
 output: html_document
 date: "2024-06-07"
 ---
+
+# Problem Set 4 
+
+## Taller R de programación y estadística 
+
+
+Este informe está estructurado para presentar el Problem Set 4 de clase de Taller R 2024-2. En este sentido, exploraremos la variabilidad de los precios de las viviendas y sus superficies en un contexto educativo. Este análisis incluye la visualización de datos mediante mapas y gráficos, así como el cálculo de estadísticas descriptivas clave que nos permitirán entender mejor las disparidades económicas dentro de la comunidad estudiantil. Finalmente, se discutirán las conclusiones obtenidas, reflexionando en recomendaciones para futuros análisis.
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Taller/Problem set 4
 
 1. set up
 ```{r inicio}
-knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls())
 ```
 
@@ -104,15 +112,11 @@ Guardar el Mapa en Pdf
 ggsave("mapa_valores_vivienda.pdf", plot = map, device = "pdf")
 ```
 
-Conclusiones
-conclusion de las estadisticas
-En base a las estadísticas podemos observar que el precio de
-las viviendas es considerablemente alto, pues la media se encuentra en  $1,399,712,145.
-No obstante, esta cifra también sugiere que pueden existir valores atípicos, que rondan 
-en precios extremadamente altos, que podrían influir en el resultado. Por otro lado,
-la desviación estándar nos presenta una variabilidad en los precios, es decir,
-estos oscilan en un rango amplio entre diferentes viviendas. Dicha observación 
-es consistente con la disparidad económica entre los estudiantes.
+# Conclusiones
+
+En base a las estadísticas podemos observar que el precio de las viviendas es considerablemente alto, pues la media se encuentra en  $1,399,712,145. No obstante, esta cifra también sugiere que pueden existir valores atípicos, que rondan  en precios extremadamente altos, que podrían influir en el resultado. Por otro lado, la desviación estándar nos presenta una variabilidad en los precios, es decir, estos oscilan en un rango amplio entre diferentes viviendas. Dicha observación  es consistente con la disparidad económica entre los estudiantes.
+
+
 
 
 

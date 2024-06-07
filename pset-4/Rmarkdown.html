@@ -12,7 +12,7 @@
 
 <meta name="date" content="2024-06-07" />
 
-<title>Pset-4</title>
+<title>Universidad de los Andes</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,34 +349,35 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Pset-4</h1>
+<h1 class="title toc-ignore">Universidad de los Andes</h1>
+<h3 class="subtitle">Facultad de Economía</h3>
 <h4 class="date">2024-06-07</h4>
 
 </div>
 
 
-<p>Taller/Problem set 4</p>
+<div id="problem-set-4" class="section level1">
+<h1>Problem Set 4</h1>
+<div id="taller-r-de-programación-y-estadística" class="section level2">
+<h2>Taller R de programación y estadística</h2>
+<p>Este informe está estructurado para presentar el Problem Set 4 de
+clase de Taller R 2024-2. En este sentido, exploraremos la variabilidad
+de los precios de las viviendas y sus superficies en un contexto
+educativo. Este análisis incluye la visualización de datos mediante
+mapas y gráficos, así como el cálculo de estadísticas descriptivas clave
+que nos permitirán entender mejor las disparidades económicas dentro de
+la comunidad estudiantil. Finalmente, se discutirán las conclusiones
+obtenidas, reflexionando en recomendaciones para futuros análisis.</p>
 <ol style="list-style-type: decimal">
 <li>set up</li>
 </ol>
-<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)
-rm(list=ls())</code></pre>
+<pre class="r"><code>rm(list=ls())</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Instalar y llamar librerías</li>
 </ol>
 <pre class="r"><code>require(pacman)</code></pre>
 <pre><code>## Loading required package: pacman</code></pre>
 <pre class="r"><code>p_load(tidyverse, rio, skimr, janitor, haven, data.table, sf, rvest, ggplot2, viridis)</code></pre>
-<pre><code>## Installing package into &#39;C:/Users/braya/AppData/Local/R/win-library/4.3&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<pre><code>## also installing the dependency &#39;gridExtra&#39;</code></pre>
-<pre><code>## package &#39;gridExtra&#39; successfully unpacked and MD5 sums checked
-## package &#39;viridis&#39; successfully unpacked and MD5 sums checked
-## 
-## The downloaded binary packages are in
-##  C:\Users\braya\AppData\Local\Temp\Rtmpk93ab6\downloaded_packages</code></pre>
-<pre><code>## 
-## viridis installed</code></pre>
 <p>Extraer información de internet en un html 1.1</p>
 <pre class="r"><code>my_url = &quot;https://eduard-martinez.github.io/pset-4.html&quot;
 browseURL(my_url) 
@@ -422,7 +423,7 @@ print(db_house)</code></pre>
 ## 219: 3.10e+08   Apartamento 4.723192 -74.03110  POINT (-74.0311 4.723192)
 ## 220: 4.20e+08          Casa 4.709000 -74.06600      POINT (-74.066 4.709)</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>NIPULAR LA INFORMACIÓN GIS</li>
+<li>MANIPULAR LA INFORMACIÓN GIS</li>
 </ol>
 <p>Convertir <code>db_house</code> en SimpleFeature</p>
 <pre class="r"><code>sf_house &lt;- st_as_sf(db_house, coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326)
@@ -467,6 +468,19 @@ print(sf_house)</code></pre>
 <p>Guardar el Mapa en Pdf</p>
 <pre class="r"><code>ggsave(&quot;mapa_valores_vivienda.pdf&quot;, plot = map, device = &quot;pdf&quot;)</code></pre>
 <pre><code>## Saving 7 x 5 in image</code></pre>
+</div>
+</div>
+<div id="conclusiones" class="section level1">
+<h1>Conclusiones</h1>
+<p>En base a las estadísticas podemos observar que el precio de las
+viviendas es considerablemente alto, pues la media se encuentra en
+$1,399,712,145. No obstante, esta cifra también sugiere que pueden
+existir valores atípicos, que rondan en precios extremadamente altos,
+que podrían influir en el resultado. Por otro lado, la desviación
+estándar nos presenta una variabilidad en los precios, es decir, estos
+oscilan en un rango amplio entre diferentes viviendas. Dicha observación
+es consistente con la disparidad económica entre los estudiantes.</p>
+</div>
 
 
 
