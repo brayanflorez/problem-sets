@@ -8,109 +8,103 @@ date: "2024-06-07"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Taller/Problem set 4
-#set up
+Taller/Problem set 4
+
+1. set up
+```{r inicio}
+knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls())
+```
 
-#Instalar y llamar librerías
+2. Instalar y llamar librerías
+
+```{r librerias, warning=FALSE }
 require(pacman)
+p_load(tidyverse, rio, skimr, janitor, haven, data.table, sf, rvest, ggplot2, viridis)
+```
 
-p_load(tidyverse, rio, skimr, janitor, haven, data.table, sf, rvest)
 
-#1. Extraer información de internet
-##1.1
+ Extraer información de internet en un html
+1.1
+```{r extraer, warning=FALSE}
 my_url = "https://eduard-martinez.github.io/pset-4.html"
-browseURL(my_url) ## Ir a la página
+browseURL(my_url) 
+my_html = read_html(my_url) 
+class(my_html) 
+```
 
-my_html = read_html(my_url) ## leer el html de la página
-class(my_html) ## ver la clase del objeto
-View(my_html)
 
-#Extraer todas las URLs contenidas en la página**
+Extraer todas las URLs contenidas en la página
+
+```{r links, warning=FALSE}
 url_full <- my_html %>% html_nodes("a") %>% html_attr("href")
 
+```
 
-# 1.2 Filtrar URL
+ 1.2 Filtrar URL
 
-# Mantener únicamente las URLs que contengan la palabra "propiedad"
+ Mantener únicamente las URLs que contengan la palabra "propiedad"
+ 
+```{r propiedad, warning=FALSE}
 url_subset <- url_full[str_detect(url_full, "propiedad")]
 
-url_subset #Mostrar el resultado
+```
+ 
+
+1.3 Iterar sobre url_subset para extraer las tablas
 
 
-#1.3 Iterar sobre url_subset para extraer las tablas
+```{r iterar, warning=FALSE}
 lista_tablas <- lapply(url_subset, function(u) {
   page <- read_html(u)
   table <- page %>% html_node("table") %>% html_table()
   return(table)
 })
 
-**1.4 Preparar la información**
-db_house <- rbindlist(lista_tablas, fill = TRUE)
+```
 
-**Mostrar el resultado**
+
+1.4 Preparar la información
+
+
+```{r preparar, warning=FALSE}
+db_house <- rbindlist(lista_tablas, fill = TRUE)
 print(db_house)
 
+```
 
-##2. NIPULAR LA INFORMACIÓN GIS
-**Instalar y cargar el paquete sf**
-if (!requireNamespace("sf", quietly = TRUE)) {
-  install.packages("sf")
-}
-library(sf)
-**Convertir `db_house` en SimpleFeature**
+
+2. NIPULAR LA INFORMACIÓN GIS
+
+Convertir `db_house` en SimpleFeature
+
+```{r convertir, warning=FALSE}
 sf_house <- st_as_sf(db_house, coords = c("lon", "lat"), crs = 4326)
 print(sf_house)
 
-##2.2
-**Instalar y cargar paquetes**
+```
 
-if (!requireNamespace("ggplot2", quietly = TRUE)) {
-  install.packages("ggplot2")
-}
-if (!requireNamespace("viridis", quietly = TRUE)) {
-  install.packages("viridis")
-}
-library(sf)
-library(ggplot2)
-library(viridis)
+Crear el mapa
 
-##Crear el mapa
-
+```{r mapa, warning=FALSE}
 map <- ggplot(data = sf_house) +
   geom_sf(aes(fill = price)) +  
   scale_fill_viridis(name = "Valor de la vivienda", option = "viridis") +
   theme_minimal() +
   labs(title = "Mapa de Valores de Vivienda")
+```
 
-##Corroborar
+Corroborar
+```{r mapa_ver, warning=FALSE}
 print(map)
+```
+
+Guardar el Mapa en Pdf
+```{r gaurdar, warning=FALSE}
 ggsave("mapa_valores_vivienda.pdf", plot = map, device = "pdf")
-
-
-
-
-
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-##set up
-rm(list=ls())
-
-
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+

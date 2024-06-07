@@ -16,7 +16,7 @@ rm(list=ls())
 ##Instalar y llamar librerías
 require(pacman)
 
-p_load(tidyverse, rio, skimr, janitor, haven, data.table, sf, rvest) 
+p_load(tidyverse, rio, skimr, janitor, haven, data.table, sf, rvest, ggplot2, viridis) 
 
 
 #############################################
@@ -58,27 +58,12 @@ print(db_house)
 
 #############################################
 ####2. MANIPULAR LA INFORMACIÓN GIS
-# Instalar y cargar el paquete sf
-if (!requireNamespace("sf", quietly = TRUE)) {
-  install.packages("sf")
-}
-library(sf)
+
 # Convertir `db_house` en SimpleFeature 
 sf_house <- st_as_sf(db_house, coords = c("lon", "lat"), crs = 4326)
 print(sf_house)
 
 ##2.2
-##Instalar y cargar paquetes
-
-if (!requireNamespace("ggplot2", quietly = TRUE)) {
-  install.packages("ggplot2")
-}
-if (!requireNamespace("viridis", quietly = TRUE)) {
-  install.packages("viridis")
-}
-library(sf)
-library(ggplot2)
-library(viridis)
 
 ##Crear el mapa
 
